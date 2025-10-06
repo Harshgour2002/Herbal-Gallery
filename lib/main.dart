@@ -1,19 +1,20 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:herbal_gallary/homeScreen.dart';
+import 'package:herbal_gallary/home_screen.dart';
+//import '../lib/home_screen.dart'
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: Colors.green,
+    ),
+    darkTheme: ThemeData(
+      brightness: Brightness.dark,
+      primarySwatch: Colors.green,
+    ),
+    themeMode: ThemeMode.system,
+    home: const HomeScreen(),
+  ));
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen()
-    );
-  }
-}
-
