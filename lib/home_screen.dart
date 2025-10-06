@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         name: "Chives",
         description: "Adds mild onion flavor to dishes."),
     Herb(
-        image: "https://picsum.photos/id/1030/800/400",
+        image: "https://picsum.photos/id/1028/800/400",
         name: "Lavender",
         description: "Used for desserts and calming teas."),
   ];
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "https://picsum.photos/id/1024/800/400",
     "https://picsum.photos/id/1025/800/400",
     "https://picsum.photos/id/1027/800/400",
-    "https://picsum.photos/id/1030/800/400",
+    "https://picsum.photos/id/1028/800/400",
   ];
 
   // ---------------- Home Content ----------------
@@ -97,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
           // Carousel
           CarouselSlider(
             options: CarouselOptions(
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.25,
               autoPlay: true,
               enlargeCenterPage: true,
               onPageChanged: (index, reason) {
@@ -115,7 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
           // Indicator
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: imageList.asMap().entries.map((entry) {
+            children: imageList
+                .asMap()
+                .entries
+                .map((entry) {
               return Container(
                 width: 8,
                 height: 8,
@@ -148,8 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              AllHerbsScreen(category: "category", allHerbs: herbList)
+                            builder: (_) =>
+                                AllHerbsScreen(
+                                    category: "category", allHerbs: herbList)
                         ),
                       );
                     },
@@ -195,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Build screens dynamically to allow carousel indicator updates
     final screens = [
       _buildHomeContent(),
-      const Center(child: Text("Search", style: TextStyle(fontSize: 20))),
+      const SearchScreen(),
       const Center(child: Text("Favorites", style: TextStyle(fontSize: 20))),
       const Center(child: Text("Explore", style: TextStyle(fontSize: 20))),
       const Center(child: Text("Profile", style: TextStyle(fontSize: 20))),
@@ -204,7 +211,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).brightness == Brightness.light
+        backgroundColor: Theme
+            .of(context)
+            .brightness == Brightness.light
             ? Colors.green.shade200
             : Colors.green.shade700,
         title: Row(
@@ -213,8 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(_appBarTitles[_currentIndex],
                 style:
                 TextStyle(
-                fontSize: 18)
-                ), // Logo or icon
+                    fontSize: 18)
+            ), // Logo or icon
             const Text(
                 "Herbal Gallery",
                 style:
@@ -235,15 +244,8 @@ class _HomeScreenState extends State<HomeScreen> {
       currentIndex: _currentIndex,
       selectedItemColor: Colors.green,
       unselectedItemColor: Colors.grey,
-      onTap: (index){
-        if (index==1){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SearchScreen())
-          );
-        }else{
-          setState(() => _currentIndex = index);
-        }
+      onTap: (index) {
+        setState(() => _currentIndex = index);
       },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
@@ -255,3 +257,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
