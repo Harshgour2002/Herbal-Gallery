@@ -24,54 +24,65 @@ class _HomeScreenState extends State<HomeScreen> {
     "Search",
     "Favorites",
     "Explore",
-    "Profile"
+    "Profile",
   ];
 
   final List<Herb> herbList = [
     Herb(
-        image: "https://picsum.photos/id/1011/800/400",
-        name: "Basil",
-        description: "A common herb used in cooking."),
+      image: "https://picsum.photos/id/1011/800/400",
+      name: "Basil",
+      description: "A common herb used in cooking.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1012/800/400",
-        name: "Mint",
-        description: "Refreshing herb, great for drinks."),
+      image: "https://picsum.photos/id/1012/800/400",
+      name: "Mint",
+      description: "Refreshing herb, great for drinks.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1013/800/400",
-        name: "Rosemary",
-        description: "Perfect for roasted dishes."),
+      image: "https://picsum.photos/id/1013/800/400",
+      name: "Rosemary",
+      description: "Perfect for roasted dishes.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1015/800/400",
-        name: "Thyme",
-        description: "Excellent for stews and sauces."),
+      image: "https://picsum.photos/id/1015/800/400",
+      name: "Thyme",
+      description: "Excellent for stews and sauces.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1016/800/400",
-        name: "Sage",
-        description: "Used in poultry and stuffing."),
+      image: "https://picsum.photos/id/1016/800/400",
+      name: "Sage",
+      description: "Used in poultry and stuffing.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1018/800/400",
-        name: "Cilantro",
-        description: "Adds fresh flavor to salads and curries."),
+      image: "https://picsum.photos/id/1018/800/400",
+      name: "Cilantro",
+      description: "Adds fresh flavor to salads and curries.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1020/800/400",
-        name: "Parsley",
-        description: "Great garnish and seasoning herb."),
+      image: "https://picsum.photos/id/1020/800/400",
+      name: "Parsley",
+      description: "Great garnish and seasoning herb.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1024/800/400",
-        name: "Oregano",
-        description: "Popular in Italian dishes."),
+      image: "https://picsum.photos/id/1024/800/400",
+      name: "Oregano",
+      description: "Popular in Italian dishes.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1025/800/400",
-        name: "Dill",
-        description: "Perfect with fish and pickles."),
+      image: "https://picsum.photos/id/1025/800/400",
+      name: "Dill",
+      description: "Perfect with fish and pickles.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1027/800/400",
-        name: "Chives",
-        description: "Adds mild onion flavor to dishes."),
+      image: "https://picsum.photos/id/1027/800/400",
+      name: "Chives",
+      description: "Adds mild onion flavor to dishes.",
+    ),
     Herb(
-        image: "https://picsum.photos/id/1028/800/400",
-        name: "Lavender",
-        description: "Used for desserts and calming teas."),
+      image: "https://picsum.photos/id/1028/800/400",
+      name: "Lavender",
+      description: "Used for desserts and calming teas.",
+    ),
   ];
 
   final List<String> imageList = [
@@ -97,10 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Carousel
           CarouselSlider(
             options: CarouselOptions(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.25,
+              height: MediaQuery.of(context).size.height * 0.25,
               autoPlay: true,
               enlargeCenterPage: true,
               onPageChanged: (index, reason) {
@@ -108,20 +116,29 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             items: imageList.map((url) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(url,
-                    fit: BoxFit.cover, width: double.infinity),
+              return GestureDetector(
+                onTap: () {
+                  // TODO: Handle carousel image tap
+                  // Example: show a dialog, navigate, etc.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Tapped image: ' + url)),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    url,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
               );
             }).toList(),
           ),
           // Indicator
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: imageList
-                .asMap()
-                .entries
-                .map((entry) {
+            children: imageList.asMap().entries.map((entry) {
               return Container(
                 width: 8,
                 height: 8,
@@ -129,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.green.withOpacity(
-                      _carouselIndex == entry.key ? 0.9 : 0.2),
+                    _carouselIndex == entry.key ? 0.9 : 0.2,
+                  ),
                 ),
               );
             }).toList(),
@@ -154,9 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) =>
-                                AllHerbsScreen(
-                                    category: "category", allHerbs: herbList)
+                          builder: (_) => AllHerbsScreen(
+                            category: "category",
+                            allHerbs: herbList,
+                          ),
                         ),
                       );
                     },
@@ -167,13 +186,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.green.shade50,
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
-                            color: Colors.green.shade200, width: 1.5),
+                          color: Colors.green.shade200,
+                          width: 1.5,
+                        ),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.arrow_forward,
-                              color: Colors.green.shade800, size: 30),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Colors.green.shade800,
+                            size: 30,
+                          ),
                           const SizedBox(height: 8),
                           Text(
                             "See All",
@@ -196,7 +220,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     // Build screens dynamically to allow carousel indicator updates
@@ -211,25 +234,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Theme
-            .of(context)
-            .brightness == Brightness.light
+        backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.green.shade200
             : Colors.green.shade700,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(_appBarTitles[_currentIndex],
-                style:
-                TextStyle(
-                    fontSize: 18)
+            Text(
+              _appBarTitles[_currentIndex],
+              style: TextStyle(fontSize: 18),
             ), // Logo or icon
             const Text(
-                "Herbal Gallery",
-                style:
-                TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold)),
+              "Herbal Gallery",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
