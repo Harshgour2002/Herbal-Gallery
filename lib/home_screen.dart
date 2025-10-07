@@ -140,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: imageList.asMap().entries.map((entry) {
               return Container(
-                width: 8,
-                height: 8,
+                width: 5,
+                height: 5,
                 margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
