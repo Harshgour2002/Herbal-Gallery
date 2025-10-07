@@ -17,7 +17,9 @@ class AllHerbsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(category),
-        backgroundColor: Colors.green,
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.green.shade500
+            : Colors.green.shade800
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),

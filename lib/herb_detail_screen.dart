@@ -44,7 +44,9 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(herb.name),
-        backgroundColor: Colors.green.shade400,
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.green.shade500
+            : Colors.green.shade800
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),

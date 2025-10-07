@@ -52,7 +52,9 @@ class _SearchWidgetState extends State<SearchWidget> {
       children: [
         // Search Bar
         Container(
-          color: Colors.green[200],
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.green.shade500
+              : Colors.green.shade800,
           padding: const EdgeInsets.all(8),
           child: Container(
             height: 40,

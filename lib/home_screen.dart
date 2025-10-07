@@ -1,7 +1,8 @@
 // lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:herbal_gallary/SearchScreen.dart';
+import 'package:herbal_gallary/widgets/Profile.dart';
+import '../widgets/SearchScreen.dart';
 import '../model/herb_model.dart';
 import '../cards/herb_card.dart';
 import 'AllHerbsScreen.dart';
@@ -225,18 +226,18 @@ class _HomeScreenState extends State<HomeScreen> {
     // Build screens dynamically to allow carousel indicator updates
     final screens = [
       _buildHomeContent(),
-      const SearchScreen(),
+      const SearchWidget(),
       const Center(child: Text("Favorites", style: TextStyle(fontSize: 20))),
       const Center(child: Text("Explore", style: TextStyle(fontSize: 20))),
-      const Center(child: Text("Profile", style: TextStyle(fontSize: 20))),
+      const ProfileScreen(),
     ];
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? Colors.green.shade200
-            : Colors.green.shade700,
+            ? Colors.green.shade500
+            : Colors.green.shade800,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
