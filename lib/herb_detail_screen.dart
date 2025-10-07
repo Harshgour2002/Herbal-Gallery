@@ -14,6 +14,7 @@ class HerbDetailScreen extends StatefulWidget {
 
 class _HerbDetailScreenState extends State<HerbDetailScreen> {
   bool isLiked = false;
+  final List<String> tags = ["Medicinal", "Leafy", "Ayurvedic", "Pain Relief"];
   int _currentIndex = 0; // For carousel indicator
 
   void _toggleLike() {
@@ -23,15 +24,15 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
   }
 
   void _onShare() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Share clicked')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Share clicked')));
   }
 
   void _onComment() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Comment clicked')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Comment clicked')));
   }
 
   @override
@@ -46,7 +47,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
         title: Text(herb.name),
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.green.shade500
-            : Colors.green.shade800
+            : Colors.green.shade800,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
@@ -88,7 +89,10 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                 return Container(
                   width: 5,
                   height: 5,
-                  margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: _currentIndex == idx
                         ? Colors.green
@@ -140,23 +144,207 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
               ],
             ),
 
+            // Example: dynamic list of tags
+            Wrap(
+              spacing: 8, // horizontal space between tags
+              runSpacing: 6, // vertical space when wrapping to new line
+              children: tags.map((tag) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.green.shade50,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.green),
+                  ),
+                  child: Text(
+                    "#$tag",
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+
             const SizedBox(height: 16),
 
-            // Herb Name
-            Text(
-              herb.name,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+            // --------Herb Name & short Description --------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent, // transparent background
+              //   borderRadius: BorderRadius.circular(15), // rounded corners
+              //   border: Border.all( // simple border
+              //     color: Colors.grey,
+              //     width: 1,
+              //   ),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    herb.name,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    herb.description,
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
               ),
             ),
 
-            const SizedBox(height: 8),
+            const Divider(),
 
-            // Herb Description
-            Text(
-              herb.description,
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
+            // ------- Region Found --------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent, // transparent background
+              //   borderRadius: BorderRadius.circular(15), // rounded corners
+              //   border: Border.all( // simple border
+              //     color: Colors.grey,
+              //     width: 1,
+              //   ),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Region Found",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Originally from Arabian Peninsula,"
+                    "now cultivated worldwide in tropical,"
+                    "semi-tropical, and arid climates."
+                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(),
+
+            // ------- Basic Detail & Types --------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent, // transparent background
+              //   borderRadius: BorderRadius.circular(15), // rounded corners
+              //   border: Border.all( // simple border
+              //     color: Colors.grey,
+              //     width: 1,
+              //   ),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Basic Details & Types",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Originally from Arabian Peninsula,"
+                    "now cultivated worldwide in tropical,"
+                    "semi-tropical, and arid climates."
+                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(),
+
+            // ------- Daily Life Use --------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent, // transparent background
+              //   borderRadius: BorderRadius.circular(15), // rounded corners
+              //   border: Border.all( // simple border
+              //     color: Colors.grey,
+              //     width: 1,
+              //   ),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Daily Life Use",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Originally from Arabian Peninsula,"
+                    "now cultivated worldwide in tropical,"
+                    "semi-tropical, and arid climates."
+                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(),
+
+            // ------- Precautions --------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent, // transparent background
+              //   borderRadius: BorderRadius.circular(15), // rounded corners
+              //   border: Border.all( // simple border
+              //     color: Colors.grey,
+              //     width: 1,
+              //   ),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Precautions",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Originally from Arabian Peninsula,"
+                    "now cultivated worldwide in tropical,"
+                    "semi-tropical, and arid climates."
+                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

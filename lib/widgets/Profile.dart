@@ -22,9 +22,39 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               // ---------------- User Info ----------------
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage("assets/logo.png"),
+              Stack(
+                children: [
+                  // Main Avatar
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage("assets/logo.png"),
+                  ),
+                  // Small edit icon
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: (){
+                        // Add edit profile picture logic here
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("clicked edit icon"),
+                            duration: Duration(seconds: 1),
+                          )
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 16, // smaller circle
+                        backgroundColor: Colors.grey.shade800,
+                        child: const Icon(
+                          Icons.edit,
+                          size: 17,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               const Text(
@@ -48,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                   onChanged: (val) {
                     // Add notification toggle logic here
                   },
-                  activeColor: Colors.yellow,
+                  activeColor: Colors.amber,
                 ),
               ),
 
