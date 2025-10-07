@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+// Theme Controller to handle theme switching
+class ThemeController {
+  static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.system);
+
+  static void toggleTheme(bool isLight) {
+    themeMode.value = isLight ? ThemeMode.light : ThemeMode.dark;
+  }
+}
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -15,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
               // ---------------- User Info ----------------
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage("assets/logo.png"), // user avatar or placeholder
+                backgroundImage: AssetImage("assets/logo.png"),
               ),
               const SizedBox(height: 10),
               const Text(
@@ -28,47 +37,43 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 20),
-
               const Divider(),
 
-              // ---------------- Favorites / Recently Viewed ----------------
+              // ---------------- Notifications ----------------
               ListTile(
-                leading: const Icon(Icons.favorite, color: Colors.red),
-                title: const Text("Favorites"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  // Navigate to favorites screen
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.history, color: Colors.blue),
-                title: const Text("Recently Viewed"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  // Navigate to history screen
-                },
+                leading: const Icon(Icons.notifications, color: Colors.amber),
+                title: const Text("Notifications"),
+                trailing: Switch(
+                  value: true,
+                  onChanged: (val) {
+                    // Add notification toggle logic here
+                  },
+                  activeColor: Colors.yellow,
+                ),
               ),
 
-              const Divider(),
-
-              // ---------------- Preferences ----------------
-              ListTile(
-                leading: const Icon(Icons.settings, color: Colors.green),
-                title: const Text("Preferences"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  // Navigate to preferences/settings screen
-                },
-              ),
+              // ---------------- Theme Switch ----------------
               ListTile(
                 leading: const Icon(Icons.dark_mode),
                 title: const Text("Theme"),
-                trailing: Switch(
-                  value: false,
-                  onChanged: (val) {
-                    // toggle light/dark theme
+                trailing: ValueListenableBuilder<ThemeMode>(
+                  valueListenable: ThemeController.themeMode,
+                  builder: (context, currentTheme, _) {
+                    final isLight = currentTheme == ThemeMode.light;
+                    return Switch(
+                      value: isLight,
+                      onChanged: (val) {
+                        ThemeController.toggleTheme(val);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(val ? "Light Mode" : "Dark Mode"),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      },
+                      activeColor: Colors.green,
+                    );
                   },
-                  activeColor: Colors.green,
                 ),
               ),
 
@@ -76,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
 
               // ---------------- About & Help ----------------
               ListTile(
-                leading: const Icon(Icons.info, color: Colors.orange),
+                leading: const Icon(Icons.info, color: Colors.deepOrange),
                 title: const Text("About"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
@@ -84,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.help, color: Colors.purple),
+                leading: const Icon(Icons.help, color: Colors.indigo),
                 title: const Text("Help & FAQ"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
@@ -94,12 +99,41 @@ class ProfileScreen extends StatelessWidget {
 
               const Divider(),
 
+              // ---------------- Privacy Policy & Terms & Condition ----------------
+              ListTile(
+                leading: const Icon(Icons.privacy_tip, color: Colors.teal),
+                title: const Text("Privacy Policy"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  // Show Privacy Policy page
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.description, color: Colors.blue),
+                title: const Text("Terms & Conditions"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  // Navigate to Terms & Conditions page
+                },
+              ),
+
+              const Divider(),
+
+              // ---------------- Language ----------------
+              ListTile(
+                leading: const Icon(Icons.language, color: Colors.cyan),
+                title: const Text("Language"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  // Navigate to language selection
+                },
+              ),
+
               // ---------------- Logout ----------------
               ListTile(
                 leading: const Icon(Icons.logout, color: Colors.red),
                 title: const Text("Logout"),
                 onTap: () {
-                  // Handle logout
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
@@ -121,7 +155,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   );
                 },
-              ),
+              )
             ],
           ),
         ),
