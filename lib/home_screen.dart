@@ -6,6 +6,7 @@ import '../widgets/SearchScreen.dart';
 import '../model/herb_model.dart';
 import '../cards/herb_card.dart';
 import 'AllHerbsScreen.dart';
+import '../widgets/Search Widget Carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -153,7 +154,39 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }).toList(),
           ),
+          const SizedBox(height: 15),
+
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Search By",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
           const SizedBox(height: 10),
+
+          //searching section by image, voice, text
+          SearchWidgetCarousel(),
+
+          const SizedBox(height: 15),
+
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Popular Herbs",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
           // Horizontal Herb List + See All Card
           SizedBox(
             height: cardHeight + 16,
