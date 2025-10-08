@@ -176,14 +176,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.transparent, // transparent background
-              //   borderRadius: BorderRadius.circular(15), // rounded corners
-              //   border: Border.all( // simple border
-              //     color: Colors.grey,
-              //     width: 1,
-              //   ),
-              // ),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -209,14 +202,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.transparent, // transparent background
-              //   borderRadius: BorderRadius.circular(15), // rounded corners
-              //   border: Border.all( // simple border
-              //     color: Colors.grey,
-              //     width: 1,
-              //   ),
-              // ),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -245,14 +231,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.transparent, // transparent background
-              //   borderRadius: BorderRadius.circular(15), // rounded corners
-              //   border: Border.all( // simple border
-              //     color: Colors.grey,
-              //     width: 1,
-              //   ),
-              // ),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -281,14 +260,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.transparent, // transparent background
-              //   borderRadius: BorderRadius.circular(15), // rounded corners
-              //   border: Border.all( // simple border
-              //     color: Colors.grey,
-              //     width: 1,
-              //   ),
-              // ),
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -317,14 +289,6 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.transparent, // transparent background
-              //   borderRadius: BorderRadius.circular(15), // rounded corners
-              //   border: Border.all( // simple border
-              //     color: Colors.grey,
-              //     width: 1,
-              //   ),
-              // ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
