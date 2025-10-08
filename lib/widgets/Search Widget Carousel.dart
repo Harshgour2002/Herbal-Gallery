@@ -22,7 +22,7 @@ class _SearchWidgetState extends State<SearchWidgetCarousel> {
   void initState() {
     super.initState();
     _pageController = PageController(
-      viewportFraction: 0.20,
+      viewportFraction: 0.19,
       initialPage: _selectedIndex,
     );
   }
@@ -107,7 +107,7 @@ class _SearchWidgetState extends State<SearchWidgetCarousel> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 3),
                 AnimatedOpacity(
                   opacity: isSelected ? 1 : 0.4,
                   duration: const Duration(milliseconds: 100),

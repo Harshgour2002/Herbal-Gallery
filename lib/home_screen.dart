@@ -1,12 +1,14 @@
 // lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:herbal_gallary/BlogsList.dart';
+import 'package:herbal_gallary/widgets/BlogsCard.dart';
 import 'package:herbal_gallary/widgets/Profile.dart';
 import '../widgets/SearchScreen.dart';
-import '../model/herb_model.dart';
 import '../cards/herb_card.dart';
 import 'AllHerbsScreen.dart';
 import '../widgets/Search Widget Carousel.dart';
+import '../dummyData/dummy_data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   int _carouselIndex = 0;
-
   double cardHeight = 150;
 
   final List<String> _appBarTitles = [
@@ -29,77 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "Profile",
   ];
 
-  final List<Herb> herbList = [
-    Herb(
-      image: "https://picsum.photos/id/1011/800/400",
-      name: "Basil",
-      description: "A common herb used in cooking.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1012/800/400",
-      name: "Mint",
-      description: "Refreshing herb, great for drinks.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1013/800/400",
-      name: "Rosemary",
-      description: "Perfect for roasted dishes.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1015/800/400",
-      name: "Thyme",
-      description: "Excellent for stews and sauces.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1016/800/400",
-      name: "Sage",
-      description: "Used in poultry and stuffing.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1018/800/400",
-      name: "Cilantro",
-      description: "Adds fresh flavor to salads and curries.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1020/800/400",
-      name: "Parsley",
-      description: "Great garnish and seasoning herb.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1024/800/400",
-      name: "Oregano",
-      description: "Popular in Italian dishes.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1025/800/400",
-      name: "Dill",
-      description: "Perfect with fish and pickles.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1027/800/400",
-      name: "Chives",
-      description: "Adds mild onion flavor to dishes.",
-    ),
-    Herb(
-      image: "https://picsum.photos/id/1028/800/400",
-      name: "Lavender",
-      description: "Used for desserts and calming teas.",
-    ),
-  ];
 
-  final List<String> imageList = [
-    "https://picsum.photos/id/1011/800/400",
-    "https://picsum.photos/id/1012/800/400",
-    "https://picsum.photos/id/1013/800/400",
-    "https://picsum.photos/id/1015/800/400",
-    "https://picsum.photos/id/1016/800/400",
-    "https://picsum.photos/id/1018/800/400",
-    "https://picsum.photos/id/1020/800/400",
-    "https://picsum.photos/id/1024/800/400",
-    "https://picsum.photos/id/1025/800/400",
-    "https://picsum.photos/id/1027/800/400",
-    "https://picsum.photos/id/1028/800/400",
-  ];
 
   // ---------------- Home Content ----------------
   Widget _buildHomeContent() {
@@ -173,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
           //searching section by image, voice, text
           SearchWidgetCarousel(),
 
-          const SizedBox(height: 15),
+          const Divider(),
+
+          const SizedBox(height: 10),
 
           Container(
             alignment: Alignment.centerLeft,
@@ -249,6 +182,51 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
+
+          const SizedBox(height: 10),
+
+          const Divider(),
+
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Daily Blogs",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          // Show first 3 daily blogs
+          ...dailyBlogs.take(3).map((blog) => BlogCardWidget(
+            title: blog['title']!,
+            description: blog['description']!,
+            imageUrl: blog['imageUrl']!,
+          )).toList(),
+
+          // "View All" text
+          GestureDetector(
+            onTap: () {
+              // Navigate to full blog list screen
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Blogslist()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "View All",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green.shade700,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
         ],
       ),
     );
