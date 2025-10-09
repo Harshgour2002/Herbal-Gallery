@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:herbal_gallary/Authentication/LoginScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Theme Controller to handle theme switching
 class ThemeController {
@@ -175,9 +177,11 @@ class ProfileScreen extends StatelessWidget {
                           child: const Text("Cancel"),
                         ),
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             Navigator.pop(context);
-                            // Add logout logic here
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.clear();
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                           },
                           child: const Text("Logout", style: TextStyle(color: Colors.red)),
                         ),
