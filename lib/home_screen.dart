@@ -30,8 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     "Profile",
   ];
 
-
-
   // ---------------- Home Content ----------------
   Widget _buildHomeContent() {
     return SingleChildScrollView(
@@ -92,10 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               "Search By",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -113,10 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               "Popular Herbs",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -192,27 +184,32 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               "Daily Blogs",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
 
           const SizedBox(height: 8),
 
           // Show first 3 daily blogs
-          ...dailyBlogs.take(3).map((blog) => BlogCardWidget(
-            title: blog['title']!,
-            description: blog['description']!,
-            imageUrl: blog['imageUrl']!,
-          )).toList(),
+          ...dailyBlogs
+              .take(3)
+              .map(
+                (blog) => BlogCardWidget(
+                  title: blog['title']!,
+                  description: blog['description']!,
+                  imageUrl: blog['imageUrl']!,
+                ),
+              )
+              .toList(),
 
           // "View All" text
           GestureDetector(
             onTap: () {
               // Navigate to full blog list screen
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Blogslist()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Blogslist()),
+              );
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -254,11 +251,22 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               _appBarTitles[_currentIndex],
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ), // Logo or icon
-            const Text(
+            Text(
               "Herbal Gallery",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),

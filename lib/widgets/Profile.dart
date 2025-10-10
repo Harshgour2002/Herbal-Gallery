@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:herbal_gallary/About.dart';
 import 'package:herbal_gallary/Authentication/LoginScreen.dart';
+import 'package:herbal_gallary/PrivacyPolicy.dart';
+import 'package:herbal_gallary/TermsAndCondition.dart';
+import 'package:herbal_gallary/contact_us.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../HelpAndFAQ.dart';
 
 // Theme Controller to handle theme switching
 class ThemeController {
@@ -109,27 +115,28 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              const Divider(),
-
-              // ---------------- About & Help ----------------
+              // ---------------- Language & Help ----------------
               ListTile(
-                leading: const Icon(Icons.info, color: Colors.deepOrange),
-                title: const Text("About"),
+                leading: const Icon(Icons.language, color: Colors.cyan),
+                title: const Text("Language"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
                   // Show about dialog or page
                 },
               ),
+
+              const Divider(),
+
+
               ListTile(
                 leading: const Icon(Icons.help, color: Colors.indigo),
                 title: const Text("Help & FAQ"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
                   // Navigate to help/FAQ
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Helpandfaq()));
                 },
               ),
-
-              const Divider(),
 
               // ---------------- Privacy Policy & Terms & Condition ----------------
               ListTile(
@@ -137,7 +144,8 @@ class ProfileScreen extends StatelessWidget {
                 title: const Text("Privacy Policy"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  // Show Privacy Policy page
+                  // Navigate to Privacy Policy page
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Privacypolicy()));
                 },
               ),
               ListTile(
@@ -146,18 +154,32 @@ class ProfileScreen extends StatelessWidget {
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
                   // Navigate to Terms & Conditions page
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Termsandcondition()));
                 },
               ),
 
               const Divider(),
 
-              // ---------------- Language ----------------
+              // ---------------- Contact ----------------
               ListTile(
-                leading: const Icon(Icons.language, color: Colors.cyan),
-                title: const Text("Language"),
+                leading: const Icon(Icons.support_agent_outlined, color: Colors.green),
+                title: const Text("Contact us"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  // Navigate to language selection
+                  // Navigate to Contact Us page
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUsScreen()));
+                },
+              ),
+
+
+              // ---------------- Language ----------------
+              ListTile(
+                leading: const Icon(Icons.error, color: Colors.redAccent),
+                title: const Text("About"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  // Navigate to about selection
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => about()));
                 },
               ),
 
