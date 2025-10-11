@@ -5,7 +5,7 @@ import 'package:herbal_gallary/PrivacyPolicy.dart';
 import 'package:herbal_gallary/TermsAndCondition.dart';
 import 'package:herbal_gallary/contact_us.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../widgets/LanguageDialogExample.dart';
 import '../HelpAndFAQ.dart';
 
 // Theme Controller to handle theme switching
@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var selectedLanguage = "English"; // Placeholder for selected language
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -121,7 +122,8 @@ class ProfileScreen extends StatelessWidget {
                 title: const Text("Language"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  // Show about dialog or page
+                  // Show about dialog for selecting languages
+                  _showDialog(context, selectedLanguage);
                 },
               ),
 
@@ -218,4 +220,73 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _showDialog(BuildContext context, String selectedLanguage) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Select Language'),
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade900
+              : Colors.white,
+          content: StatefulBuilder(
+            builder: (context, setStateDialog) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RadioListTile<String>(
+                    title: const Text('English'),
+                    value: 'English',
+                    activeColor: Colors.green,
+                    groupValue: selectedLanguage,
+                    onChanged: (value) {
+                      setStateDialog(() {
+                        selectedLanguage = value!;
+                      });
+                    },
+                  ),
+                  RadioListTile<String>(
+                    title: const Text('Hindi'),
+                    value: 'Hindi',
+                    activeColor: Colors.green,
+                    groupValue: selectedLanguage,
+                    onChanged: (value) {
+                      setStateDialog(() {
+                        selectedLanguage = value!;
+                      });
+                    },
+                  ),
+                  RadioListTile<String>(
+                    title: const Text('Marathi'),
+                    value: 'Marathi',
+                    activeColor: Colors.green,
+                    groupValue: selectedLanguage,
+                    onChanged: (value) {
+                      setStateDialog(() {
+                        selectedLanguage = value!;
+                      });
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel', style: TextStyle(color:Colors.green,),),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK', style: TextStyle(color: Colors.green,),),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
+
