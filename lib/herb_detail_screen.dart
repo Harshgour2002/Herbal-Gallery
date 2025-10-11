@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:herbal_gallary/services/tts_service.dart';
 import 'model/herb_model.dart';
-import '../services/tts_service.dart';
 
 class HerbDetailScreen extends StatefulWidget {
   final Herb herb;
@@ -207,37 +206,46 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(10),
-                          backgroundColor: Colors.green, // Button color
-                        ),
-                        onPressed: () {
-                          String fullText =
-                              """
+
+                      // 👇 This rebuilds automatically when isSpeaking changes
+                      ValueListenableBuilder<bool>(
+                        valueListenable: ttsService.isSpeaking,
+                        builder: (context, isSpeaking, _) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(10),
+                              backgroundColor: Colors.green, // Button color
+
+                            ),
+                            onPressed: () {
+                              String fullText = """
                                 ${widget.herb.name}.
                                 ${widget.herb.description}.
                                 ${widget.herb.regionFound}.
                                 ${widget.herb.basicDetailAndTypes}.
                                 ${widget.herb.dailyLifeUses}.
                                 ${widget.herb.precaution}.
-                                  """;
+                                """;
 
-                          if (ttsService.isSpeaking) {
-                            ttsService.stop();
-                          } else {
-                            ttsService.speak(fullText);
-                          }
+                              if (isSpeaking) {
+                                ttsService.stop();
+                              } else {
+                                ttsService.speak(fullText);
+                              }
+                            },
+                            child: Icon(
+                              isSpeaking ? Icons.stop : Icons.volume_up,
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? Colors.white
+                                  : Colors.black,
+                              size: 25,
+                            ),
+                          );
                         },
-
-                        child: Icon(
-                          ttsService.isSpeaking ? Icons.stop : Icons.volume_up,
-                          color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.black,
-                          size: 25,
-                        ),
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 8),
                   Text(
                     herb.description,
