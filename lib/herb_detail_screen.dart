@@ -215,10 +215,10 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(10),
                               backgroundColor: Colors.green, // Button color
-
                             ),
                             onPressed: () {
-                              String fullText = """
+                              String fullText =
+                                  """
                                 ${widget.herb.name}.
                                 ${widget.herb.description}.
                                 ${widget.herb.regionFound}.
@@ -235,7 +235,9 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                             },
                             child: Icon(
                               isSpeaking ? Icons.stop : Icons.volume_up,
-                              color: Theme.of(context).brightness == Brightness.light
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.light
                                   ? Colors.white
                                   : Colors.black,
                               size: 25,

@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   // TODO: Handle carousel image tap
                   // Example: show a dialog, navigate, etc.
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Tapped image: ' + url)),
                   );
