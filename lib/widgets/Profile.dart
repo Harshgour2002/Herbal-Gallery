@@ -5,7 +5,6 @@ import 'package:herbal_gallary/PrivacyPolicy.dart';
 import 'package:herbal_gallary/TermsAndCondition.dart';
 import 'package:herbal_gallary/contact_us.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../widgets/LanguageDialogExample.dart';
 import '../HelpAndFAQ.dart';
 
 // Theme Controller to handle theme switching

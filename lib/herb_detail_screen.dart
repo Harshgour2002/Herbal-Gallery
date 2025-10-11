@@ -1,7 +1,9 @@
 // lib/screens/herb_detail_screen.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:herbal_gallary/services/tts_service.dart';
 import 'model/herb_model.dart';
+import '../services/tts_service.dart';
 
 class HerbDetailScreen extends StatefulWidget {
   final Herb herb;
@@ -16,7 +18,22 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
   bool isLiked = false;
   final List<String> tags = ["Medicinal", "Leafy", "Ayurvedic", "Pain Relief"];
   int _currentIndex = 0; // For carousel indicator
+  //-------------------------------------------------
+  late TtsService ttsService;
 
+  @override
+  void initState() {
+    super.initState();
+    ttsService = TtsService();
+  }
+
+  @override
+  void dispose() {
+    ttsService.dispose();
+    super.dispose();
+  }
+
+  //--------------------------------------------------
   void _toggleLike() {
     setState(() {
       isLiked = !isLiked;
@@ -180,12 +197,46 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    herb.name,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        herb.name,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(10),
+                          backgroundColor: Colors.green, // Button color
+                        ),
+                        onPressed: () {
+                          String fullText =
+                              """
+                                ${widget.herb.name}.
+                                ${widget.herb.description}.
+                                ${widget.herb.regionFound}.
+                                ${widget.herb.basicDetailAndTypes}.
+                                ${widget.herb.dailyLifeUses}.
+                                ${widget.herb.precaution}.
+                                  """;
+
+                          if (ttsService.isSpeaking) {
+                            ttsService.stop();
+                          } else {
+                            ttsService.speak(fullText);
+                          }
+                        },
+
+                        child: Icon(
+                          ttsService.isSpeaking ? Icons.stop : Icons.volume_up,
+                          color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.black,
+                          size: 25,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -215,10 +266,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Originally from Arabian Peninsula,"
-                    "now cultivated worldwide in tropical,"
-                    "semi-tropical, and arid climates."
-                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    herb.regionFound,
                     style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ],
@@ -244,10 +292,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Originally from Arabian Peninsula,"
-                    "now cultivated worldwide in tropical,"
-                    "semi-tropical, and arid climates."
-                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    herb.basicDetailAndTypes,
                     style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ],
@@ -273,10 +318,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Originally from Arabian Peninsula,"
-                    "now cultivated worldwide in tropical,"
-                    "semi-tropical, and arid climates."
-                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    herb.dailyLifeUses,
                     style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ],
@@ -301,10 +343,7 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Originally from Arabian Peninsula,"
-                    "now cultivated worldwide in tropical,"
-                    "semi-tropical, and arid climates."
-                    "Commonly found in Africa, India, and Mediterranean regions.",
+                    herb.precaution,
                     style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ],
