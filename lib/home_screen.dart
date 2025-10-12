@@ -49,8 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
             items: imageList.map((url) {
               return GestureDetector(
                 onTap: () {
-                  // TODO: Handle carousel image tap
-                  // Example: show a dialog, navigate, etc.
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Tapped image: ' + url)),
@@ -160,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "See All",
+                            "View All",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
