@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "View All",
+                            "See All",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
