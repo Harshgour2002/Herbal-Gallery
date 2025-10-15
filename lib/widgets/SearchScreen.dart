@@ -48,6 +48,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         // Search Bar
@@ -57,18 +58,26 @@ class _SearchWidgetState extends State<SearchWidget> {
               : Colors.green.shade800,
           padding: const EdgeInsets.all(8),
           child: Container(
-            height: 40,
+            height: 47,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDark ? Colors.grey.shade400 : Colors.white,
               borderRadius: BorderRadius.circular(20),
             ),
             child: TextField(
+              textAlignVertical: TextAlignVertical.center,
               controller: _searchController,
               autofocus: false,
-              decoration: const InputDecoration(
-                hintText: "Search...",
+              cursorColor: Colors.green,
+              style: TextStyle(color: isDark ? Colors.black : Colors.black, fontSize: 18),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(right: 15),
+                fillColor: isDark ? Colors.grey : Colors.white,
+                hintText: "Search...", hintStyle: TextStyle(color: isDark ? Colors.grey.shade600 : Colors.grey.shade400),
                 border: InputBorder.none,
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                prefixIcon: Icon(Icons.search, color: isDark ? Colors.grey.shade600 : Colors.black),
               ),
             ),
           ),

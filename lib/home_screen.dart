@@ -1,5 +1,6 @@
 // lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
+import 'package:herbal_gallary/BlogDetailPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:herbal_gallary/BlogsList.dart';
 import 'package:herbal_gallary/widgets/BlogsCard.dart';
@@ -193,10 +194,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ...dailyBlogs
               .take(3)
               .map(
-                (blog) => BlogCardWidget(
-                  title: blog['title']!,
-                  description: blog['description']!,
-                  imageUrl: blog['imageUrl']!,
+                (blog) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlogDetailPage(
+                          title: blog['title']!,
+                          description: blog['description']!,
+                          imageUrl: blog['imageUrl']!,
+                        ),
+                      ),
+                    );
+                  },
+                  child: BlogCardWidget(
+                    title: blog['title']!,
+                    description: blog['description']!,
+                    imageUrl: blog['imageUrl']!,
+                  ),
                 ),
               )
               .toList(),
