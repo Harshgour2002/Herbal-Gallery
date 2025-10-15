@@ -57,13 +57,16 @@ class _HerbDetailScreenState extends State<HerbDetailScreen> {
 
     // Carousel images list
     final List<String> images = [herb.image]; // Add more URLs if available
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(herb.name),
-        backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? Colors.green.shade500
-            : Colors.green.shade800,
+        title: Text(
+          herb.name,
+          style: TextStyle(color: isDark ? Colors.black : Colors.white),
+        ),
+        backgroundColor: isDark ? Colors.green.shade800 : Colors.green.shade500,
+        iconTheme: IconThemeData(color: isDark ? Colors.black : Colors.white),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),

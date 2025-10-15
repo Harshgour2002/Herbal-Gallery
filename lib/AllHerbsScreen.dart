@@ -14,12 +14,17 @@ class AllHerbsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        title: Text(category),
+        title: Text(
+          category,
+          style: TextStyle(color: isDark ? Colors.black : Colors.white),
+        ),
+        iconTheme: IconThemeData(color: isDark ? Colors.black : Colors.white),
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.green.shade500
-            : Colors.green.shade800
+            : Colors.green.shade800,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
