@@ -406,8 +406,6 @@ final List<Map<String, String>> dailyBlogs = [
   },
 ];
 
-
-
 final List<String> imageList = [
   "https://picsum.photos/id/1011/800/400",
   "https://picsum.photos/id/1012/800/400",
@@ -420,4 +418,62 @@ final List<String> imageList = [
   "https://picsum.photos/id/1025/800/400",
   "https://picsum.photos/id/1027/800/400",
   "https://picsum.photos/id/1028/800/400",
+];
+
+
+final List<Map<String, dynamic>> categories = [
+  {
+    "name": "Medicinal Plants",
+    "items": [
+      {"title": "Tulsi", "image": "https://picsum.photos/id/1011/800/400"},
+      {"title": "Neem", "image": "https://picsum.photos/id/1012/800/400"},
+      {"title": "Aloe Vera", "image": "https://picsum.photos/id/1013/800/400"},
+      {"title": "Ashwagandha", "image": "https://picsum.photos/id/1015/800/400"},
+    ]
+  },
+  {
+    "name": "Spices",
+    "items": [
+      {"title": "Turmeric", "image": "https://picsum.photos/id/1016/800/400"},
+      {"title": "Cinnamon", "image": "https://picsum.photos/id/1018/800/400"},
+      {"title": "Cardamom", "image": "https://picsum.photos/id/1020/800/400"},
+      {"title": "Clove", "image": "https://picsum.photos/id/1024/800/400"},
+    ]
+  },
+  {
+    "name": "Flowering Plants",
+    "items": [
+      {"title": "Rose", "image": "https://picsum.photos/id/1025/800/400"},
+      {"title": "Jasmine", "image": "https://picsum.photos/id/1027/800/400"},
+      {"title": "Sunflower", "image": "https://picsum.photos/id/1028/800/400"},
+      {"title": "Marigold", "image": "https://picsum.photos/id/1031/800/400"},
+    ]
+  },
+  {
+    "name": "Aromatic Herbs",
+    "items": [
+      {"title": "Basil", "image": "https://picsum.photos/id/1032/800/400"},
+      {"title": "Mint", "image": "https://picsum.photos/id/1033/800/400"},
+      {"title": "Rosemary", "image": "https://picsum.photos/id/1035/800/400"},
+      {"title": "Lavender", "image": "https://picsum.photos/id/1036/800/400"},
+    ]
+  },
+  {
+    "name": "Wild Plants",
+    "items": [
+      {"title": "Dandelion", "image": "https://picsum.photos/id/1037/800/400"},
+      {"title": "Thistle", "image": "https://picsum.photos/id/1038/800/400"},
+      {"title": "Fern", "image": "https://picsum.photos/id/1040/800/400"},
+      {"title": "Wild Grass", "image": "https://picsum.photos/id/1041/800/400"},
+    ]
+  },
+  {
+    "name": "Aquatic Plants",
+    "items": [
+      {"title": "Lotus", "image": "https://picsum.photos/id/1042/800/400"},
+      {"title": "Water Lily", "image": "https://picsum.photos/id/1043/800/400"},
+      {"title": "Duckweed", "image": "https://picsum.photos/id/1044/800/400"},
+      {"title": "Papyrus", "image": "https://picsum.photos/id/1045/800/400"},
+    ]
+  },
 ];

@@ -4,8 +4,9 @@ import 'package:herbal_gallary/BlogDetailPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:herbal_gallary/BlogsList.dart';
 import 'package:herbal_gallary/widgets/BlogsCard.dart';
+import 'package:herbal_gallary/widgets/ExploreWidget.dart';
 import 'package:herbal_gallary/widgets/Profile.dart';
-import '../widgets/SearchScreen.dart';
+//import '../widgets/SearchScreen.dart';
 import '../cards/herb_card.dart';
 import 'AllHerbsScreen.dart';
 import '../widgets/Search Widget Carousel.dart';
@@ -25,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<String> _appBarTitles = [
     "Home",
-    "Search",
     "Favorites",
     "Explore",
     "Profile",
@@ -248,9 +248,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // Build screens dynamically to allow carousel indicator updates
     final screens = [
       _buildHomeContent(),
-      const SearchWidget(),
+      //const SearchWidget(),
       const Center(child: Text("Favorites", style: TextStyle(fontSize: 20))),
-      const Center(child: Text("Explore", style: TextStyle(fontSize: 20))),
+      const Explorewidget(),
       const ProfileScreen(),
     ];
 
@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+        //BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorites"),
         BottomNavigationBarItem(icon: Icon(Icons.explore), label: "Explore"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
