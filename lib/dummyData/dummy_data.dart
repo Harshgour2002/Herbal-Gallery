@@ -429,6 +429,16 @@ final List<Map<String, dynamic>> categories = [
       {"title": "Neem", "image": "https://picsum.photos/id/1012/800/400"},
       {"title": "Aloe Vera", "image": "https://picsum.photos/id/1013/800/400"},
       {"title": "Ashwagandha", "image": "https://picsum.photos/id/1015/800/400"},
+      {"title": "Ginger", "image": "https://picsum.photos/id/1014/800/400"},
+      {"title": "Lavender", "image": "https://picsum.photos/id/1017/800/400"},
+      {"title": "Chamomile", "image": "https://picsum.photos/id/1019/800/400"},
+      {"title": "Rosemary", "image": "https://picsum.photos/id/1021/800/400"},
+      {"title": "Thyme", "image": "https://picsum.photos/id/1022/800/400"},
+      {"title": "Echinacea", "image": "https://picsum.photos/id/1023/800/400"},
+      {"title": "Sage", "image": "https://picsum.photos/id/1026/800/400"},
+      {"title": "Fennel", "image": "https://picsum.photos/id/1029/800/400"},
+      {"title": "Dandelion", "image": "https://picsum.photos/id/1030/800/400"},
+      {"title": "Calendula", "image": "https://picsum.photos/id/1034/800/400"},
     ]
   },
   {

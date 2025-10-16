@@ -85,15 +85,16 @@ class _ExplorewidgetState extends State<Explorewidget> {
               borderRadius: BorderRadius.circular(15),
             ),
             child: TextField(
+              style: TextStyle(color: Colors.black),
               controller: _searchController,
               textAlignVertical: TextAlignVertical.center,
               cursorColor: Colors.green,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 hintText: "Search herbs...",
-                // hintStyle: TextStyle(
-                //   color: isDark ? Colors.grey.shade600 : Colors.grey.shade400,
-                // ),
+                hintStyle: TextStyle(
+                  color: isDark ? Colors.grey.shade600 : Colors.grey.shade400,
+                ),
                 border: InputBorder.none,
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
