@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../dummyData/dummy_data.dart';
+
 class Explorewidget extends StatefulWidget {
   const Explorewidget({super.key});
 
@@ -9,21 +10,9 @@ class Explorewidget extends StatefulWidget {
 
 class _ExplorewidgetState extends State<Explorewidget> {
   final TextEditingController _searchController = TextEditingController();
+  bool filterBtnClicked = false;
 
-  final List<String> filter = [
-    "Leafy",
-    "Medicinal",
-    "Spices",
-    "Aromatic",
-    "Culinary",
-    "Wild",
-    "Flowering",
-    "Shrubs",
-    "Climbers",
-    "Fruity",
-    "Desert",
-    "Aquatic",
-  ];
+  final List<String> filter = ["Leafy", "Medicinal", "Spices"];
 
   int selectedIndex = -1;
   String searchQuery = "";
@@ -56,17 +45,20 @@ class _ExplorewidgetState extends State<Explorewidget> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // 🔍 Apply search filtering
-    final filteredCategories = categories.map((category) {
-      final List<dynamic> items = category["items"];
-      final filteredItems = items
-          .where((item) =>
-          item["title"].toString().toLowerCase().contains(searchQuery))
-          .toList();
-      return {
-        "name": category["name"],
-        "items": filteredItems,
-      };
-    }).where((cat) => (cat["items"] as List).isNotEmpty).toList();
+    final filteredCategories = categories
+        .map((category) {
+          final List<dynamic> items = category["items"];
+          final filteredItems = items
+              .where(
+                (item) => item["title"].toString().toLowerCase().contains(
+                  searchQuery,
+                ),
+              )
+              .toList();
+          return {"name": category["name"], "items": filteredItems};
+        })
+        .where((cat) => (cat["items"] as List).isNotEmpty)
+        .toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(12),
@@ -99,15 +91,19 @@ class _ExplorewidgetState extends State<Explorewidget> {
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.search,
-                        color: isDark
-                            ? Colors.grey.shade600
-                            : Colors.grey.shade400),
+                    Icon(
+                      Icons.search,
+                      color: isDark
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade400,
+                    ),
                     const SizedBox(width: 12),
-                    Icon(Icons.mic,
-                        color: isDark
-                            ? Colors.grey.shade600
-                            : Colors.grey.shade400),
+                    Icon(
+                      Icons.mic,
+                      color: isDark
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade400,
+                    ),
                     const SizedBox(width: 18),
                   ],
                 ),
@@ -121,26 +117,60 @@ class _ExplorewidgetState extends State<Explorewidget> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(filter.length, (index) {
-                final bool isSelected = selectedIndex == index;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: ElevatedButton(
-                    onPressed: () => handleFilterPress(index),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                      isSelected ? Colors.green : Colors.grey.shade300,
-                      foregroundColor:
-                      isSelected ? Colors.white : Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      elevation: isSelected ? 2 : 0,
-                    ),
-                    child: Text(filter[index]),
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filterBtnClicked = !filterBtnClicked;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: filterBtnClicked
+                        ? Colors
+                              .green
+                              .shade400 //active (clicked)
+                        : Colors.green.shade800, //default
+                    foregroundColor: Colors.white,
+                    elevation: filterBtnClicked ? 3 : 1,
+                    shadowColor: Colors.green.shade900.withValues(alpha: 0.4),
                   ),
-                );
-              }),
+                  child: Row(
+                    children: [
+                      Text(
+                        "filter",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                      SizedBox(width: 5),
+                      Icon(Icons.filter_alt_outlined, color: Colors.white),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Row(
+                  children: List.generate(filter.length, (index) {
+                    final bool isSelected = selectedIndex == index;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: ElevatedButton(
+                        onPressed: () => handleFilterPress(index),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isSelected
+                              ? Colors.green
+                              : Colors.grey.shade300,
+                          foregroundColor: isSelected
+                              ? Colors.white
+                              : Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          elevation: isSelected ? 2 : 0,
+                        ),
+                        child: Text(filter[index]),
+                      ),
+                    );
+                  }),
+                ),
+              ],
             ),
           ),
 
@@ -182,12 +212,12 @@ class _ExplorewidgetState extends State<Explorewidget> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: 1,
-                        ),
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                              childAspectRatio: 1,
+                            ),
                         itemCount: items.length > 4 ? 4 : items.length,
                         itemBuilder: (context, index) {
                           final item = items[index];
@@ -209,17 +239,19 @@ class _ExplorewidgetState extends State<Explorewidget> {
                                       width: double.infinity,
                                       errorBuilder:
                                           (context, error, stackTrace) =>
-                                      const Icon(Icons.broken_image),
+                                              const Icon(Icons.broken_image),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(vertical: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8,
+                                  ),
                                   child: Text(
                                     item["title"],
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ],
